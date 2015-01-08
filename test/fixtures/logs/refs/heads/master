@@ -1,0 +1,4 @@
+0000000000000000000000000000000000000000 101868c4ce62b7e96a1f7c3b64fa40285ee00d5e Franck Verrot <franck@verrot.fr> 1420746080 +0100	commit (initial): Initial commit
+101868c4ce62b7e96a1f7c3b64fa40285ee00d5e fe326fd5cb986e6ef3d83f02857fb5bc10333aa4 Franck Verrot <franck@verrot.fr> 1420746126 +0100	commit: Add bar
+fe326fd5cb986e6ef3d83f02857fb5bc10333aa4 6f331f786e8c5ca8ffb67d1dfd3b1e1942167e3e Franck Verrot <franck@verrot.fr> 1420746154 +0100	commit: Modify foo
+6f331f786e8c5ca8ffb67d1dfd3b1e1942167e3e 49b6dbdb939f0d9494d40f210bbaeb54d6a15c35 Franck Verrot <franck@verrot.fr> 1420746184 +0100	commit: Remove bar
