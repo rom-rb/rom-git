@@ -1,5 +1,4 @@
-# ROM::Git
-
+# ROM::Git [![Travis](https://secure.travis-ci.org/franckverrot/rom-git.png)](http://travis-ci.org/franckverrot/rom-git)
 Minimal Git support for [Ruby Object Mapper](https://github.com/rom-rb/rom).
 Currently only supports reading from the repository.
 
