@@ -1,9 +1,6 @@
 require "test_helper"
 require "anima"
 
-class Commit
-  include Anima.new(:sha1, :message, :committer)
-end
 
 describe "Git Adapter" do
   let(:path) { File.expand_path("./test/fixtures") }
@@ -34,7 +31,9 @@ describe "Git Adapter" do
 
     setup.mappers do
       define(:commits) do
-        model Commit
+        model (Class.new do
+          include Anima.new(:sha1, :message, :committer)
+        end)
       end
     end
     setup
