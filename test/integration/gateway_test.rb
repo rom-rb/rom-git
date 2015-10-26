@@ -5,15 +5,16 @@ describe 'Git gateway' do
   describe 'using the default (master) branch' do
     let(:path) { File.expand_path('./test/fixtures') }
     let(:rom_setup) do
-      ROM.setup(
-        commits: [
-          :git,
-          path,
-          branch: 'refs/heads/master'
-        ]
-      )
+      rom_env = ROM::Environment.new
+      rom_env.use :auto_registration
+      rom_env.setup(commits: [
+        :git,
+        path,
+        branch: 'refs/heads/master'
+      ])
+      rom_env
     end
-    let(:rom) { rom_setup.finalize }
+    let(:rom) { rom_setup.finalize.env }
 
     before do
       rom_setup.relation(:commits) do
