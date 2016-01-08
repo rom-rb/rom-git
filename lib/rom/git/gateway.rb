@@ -30,7 +30,11 @@ module ROM
         branch = (@options || {}).fetch(:branch, 'refs/head/master')
         ref    = repo.references[branch]
 
-        @connection = ref.log rescue []
+        @connection = begin
+                        ref.log
+                      rescue
+                        []
+                      end
       end
     end
   end

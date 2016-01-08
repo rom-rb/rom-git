@@ -4,42 +4,33 @@ require 'virtus'
 describe 'Git gateway' do
   describe 'using the default (master) branch' do
     let(:path) { File.expand_path('./test/fixtures') }
-    let(:rom_setup) do
-      rom_env = ROM::Environment.new
-      rom_env.use :auto_registration
-      rom_env.setup(commits: [
-        :git,
-        path,
-        branch: 'refs/heads/master'
-      ])
-      rom_env
-    end
-    let(:rom) { rom_setup.finalize.env }
+    let(:rom) do
+      ROM.container(:git, path, branch: 'refs/heads/master') do |rom_setup|
+        rom_setup.use(:macros)
+        
+        rom_setup.relation(:commits) do
 
-    before do
-      rom_setup.relation(:commits) do
-        gateway :commits
+          def by_sha1(sha1)
+            restrict(sha1: sha1)
+          end
 
-        def by_sha1(sha1)
-          restrict(sha1: sha1)
+          def by_committer(committer_name)
+            restrict(committer: committer_name)
+          end
         end
 
-        def by_committer(committer_name)
-          restrict(committer: committer_name)
-        end
-      end
+        rom_setup.mappers do
+          define(:commits) do
+            model(Class.new do
+              include Virtus.model
 
-      rom_setup.mappers do
-        define(:commits) do
-          model(Class.new do
-            include Virtus.model
+              attribute :sha1,     String
+              attribute :message,  String
+              attribute :committer, String
+            end)
 
-            attribute :sha1,     String
-            attribute :message,  String
-            attribute :committer, String
-          end)
-
-          register_as :entity
+            register_as :entity
+          end
         end
       end
     end

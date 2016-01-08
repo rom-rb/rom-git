@@ -20,39 +20,38 @@ require 'rubygems/specification'
 require 'bundler'
 Bundler::GemHelper.install_tasks
 
-$:<< 'lib'
+$LOAD_PATH << 'lib'
 require 'rom-git'
 
-$stdout.puts """
+$stdout.puts ''"
 rom-git - Copyright (C) 2015 Franck Verrot <franck@verrot.fr>
 This program comes with ABSOLUTELY NO WARRANTY; for details type `rake license'.
 This is free software, and you are welcome to redistribute it
 under certain conditions; type `rake license' for details.
 
-"""
+"''
 
 require 'rake/testtask'
 Rake::TestTask.new do |t|
-  t.libs << "test"
-  t.pattern = "test/**/*_test.rb"
-  #t.verbose = true
-  #t.warning = true
+  t.libs << 'test'
+  t.pattern = 'test/**/*_test.rb'
+  # t.verbose = true
+  # t.warning = true
 end
 
 Rake::TestTask.new(:unit_tests) do |t|
-  t.libs << "test"
-  t.pattern = "test/unit/**/*_test.rb"
-  #t.verbose = true
-  #t.warning = true
+  t.libs << 'test'
+  t.pattern = 'test/unit/**/*_test.rb'
+  # t.verbose = true
+  # t.warning = true
 end
 
 Rake::TestTask.new(:integration_tests) do |t|
-  t.libs << "test"
-  t.pattern = "test/integration/**/*_test.rb"
-  #t.verbose = true
-  #t.warning = true
+  t.libs << 'test'
+  t.pattern = 'test/integration/**/*_test.rb'
+  # t.verbose = true
+  # t.warning = true
 end
-
 
 def gemspec
   @gemspec ||= begin
@@ -61,38 +60,38 @@ def gemspec
                end
 end
 
-desc "Clean the current directory"
+desc 'Clean the current directory'
 task :clean do
   rm_rf 'tmp'
   rm_rf 'pkg'
 end
 
-desc "Run the full spec suite"
-task :full => ["clean", "test"]
+desc 'Run the full spec suite'
+task full: %w(clean test)
 
-desc "install the gem locally"
-task :install => :package do
-  sh %{gem install pkg/#{gemspec.name}-#{gemspec.version}}
+desc 'install the gem locally'
+task install: :package do
+  sh %(gem install pkg/#{gemspec.name}-#{gemspec.version})
 end
 
-desc "validate the gemspec"
+desc 'validate the gemspec'
 task :gemspec do
   gemspec.validate
 end
 
-desc "Build the gem"
-task :gem => [:gemspec, :build] do
-  mkdir_p "pkg"
-  sh "gem build rom-git.gemspec"
-  mv "#{gemspec.full_name}.gem", "pkg"
+desc 'Build the gem'
+task gem: [:gemspec, :build] do
+  mkdir_p 'pkg'
+  sh 'gem build rom-git.gemspec'
+  mv "#{gemspec.full_name}.gem", 'pkg'
 end
 
-desc "Install rom-git"
-task :install => :gem do
+desc 'Install rom-git'
+task install: :gem do
   sh "gem install pkg/#{gemspec.full_name}.gem"
 end
 
-task :default => :full
+task default: :full
 
 task :license do
   `open http://www.gnu.org/licenses/gpl.txt`
