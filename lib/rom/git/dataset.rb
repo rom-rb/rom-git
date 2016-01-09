@@ -12,7 +12,11 @@ module ROM
           {
             sha1:      row[:id_new] || row[:sha1],
             message:   row[:message],
-            committer: (row[:committer].fetch(:name, 'unknown committer name') rescue row[:committer].to_s)
+            committer: (begin
+                          row[:committer].fetch(:name, 'unknown committer name')
+                        rescue
+                          row[:committer].to_s
+                        end)
           }
         end
       end

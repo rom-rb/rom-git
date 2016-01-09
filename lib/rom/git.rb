@@ -1,4 +1,4 @@
-require "rugged"
+require 'rugged'
 
 require 'rom'
 require 'rom/git/gateway'
