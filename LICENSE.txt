@@ -1,4 +1,4 @@
-Copyright (c) 2015 Franck Verrot
+Copyright (c) 2015-2016 Franck Verrot, Piotr Solnica
 
 MIT License
 
