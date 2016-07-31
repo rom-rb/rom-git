@@ -1,13 +1,15 @@
 # coding: utf-8
 
+require File.expand_path('../lib/rom/git/version', __FILE__)
+
 Gem::Specification.new do |spec|
   spec.name          = "rom-git"
-  spec.version       = "2.0.0"
-  spec.authors       = ["Franck Verrot"]
-  spec.email         = ["franck@verrot.fr"]
+  spec.version       = ROM::Git::VERSION
+  spec.authors       = ["Franck Verrot", "Piotr Solnica"]
+  spec.email         = ["franck@verrot.fr", "piotr.solnica+oss@gmail.com"]
   spec.summary       = "Git adapter for the rom-rb"
   spec.description   = spec.summary
-  spec.homepage      = "https://github.com/franckverrot/rom-git"
+  spec.homepage      = "http://rom-rb.org"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -19,8 +21,5 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "minitest"
-  spec.add_development_dependency "pry"
-  spec.add_development_dependency "inflecto"
-  spec.add_development_dependency "virtus"
+  spec.add_development_dependency "rspec"
 end
