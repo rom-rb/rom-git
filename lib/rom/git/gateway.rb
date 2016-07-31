@@ -20,13 +20,10 @@ module ROM
 
       attr_reader :repo
 
-      attr_reader :walker
-
       def initialize(path, options = EMPTY_HASH)
         super
         @datasets = {}
         @repo = Rugged::Repository.new(path)
-        @walker = Rugged::Walker.new(repo)
         reset_data
       end
 
