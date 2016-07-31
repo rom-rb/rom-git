@@ -5,7 +5,7 @@ Gem::Specification.new do |spec|
   spec.version       = "2.0.0"
   spec.authors       = ["Franck Verrot"]
   spec.email         = ["franck@verrot.fr"]
-  spec.summary       = "Git support for the ROM Ruby Object Mapper"
+  spec.summary       = "Git adapter for the rom-rb"
   spec.description   = spec.summary
   spec.homepage      = "https://github.com/franckverrot/rom-git"
   spec.license       = "MIT"
@@ -14,9 +14,8 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = spec.files.grep(%r{^test/})
 
-  spec.add_runtime_dependency "rom", "~> 1.0.0"
-
-  spec.add_dependency "rugged"
+  spec.add_runtime_dependency "rom", "~> 2.0"
+  spec.add_runtime_dependency "rugged", "~> 0.24"
 
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
