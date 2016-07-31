@@ -7,7 +7,7 @@ require 'rom/git/dataset'
 module ROM
   module Git
     class Gateway < ROM::Gateway
-      DEFAULT_BRANCH = 'refs/head/master'.freeze
+      DEFAULT_BRANCH = 'refs/heads/master'.freeze
       include Options
 
       option :path, accept: String, reader: true
@@ -45,12 +45,7 @@ module ROM
       end
 
       def reset_data
-        @connection =
-          begin
-            repo.references[branch].log
-          rescue
-            []
-          end
+        @connection = repo.references[branch].log
       end
     end
   end

@@ -5,7 +5,7 @@ RSpec.describe 'Git gateway' do
     let(:path) { File.expand_path('./spec/fixtures') }
 
     let(:rom) do
-      ROM.container(:git, path, branch: 'refs/heads/master') do |conf|
+      ROM.container(:git, path) do |conf|
         conf.relation(:commits) do
 
           def by_sha1(sha1)
@@ -54,6 +54,13 @@ RSpec.describe 'Git gateway' do
       let(:commits) { repo.commits.one }
 
       include_context 'a mapped relation tuple'
+    end
+
+    describe 'setup' do
+      it 'raises when branch name is invalid' do
+        expect { ROM.container(:git, path, branch: 'not-here') }
+          .to raise_error(Rugged::ReferenceError, /not-here/)
+      end
     end
   end
 end
