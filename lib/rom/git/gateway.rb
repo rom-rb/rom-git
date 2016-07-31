@@ -14,8 +14,6 @@ module ROM
 
       option :branch, accept: String, reader: true, default: DEFAULT_BRANCH
 
-      attr_reader :connection
-
       attr_reader :datasets
 
       attr_reader :repo
@@ -24,7 +22,6 @@ module ROM
         super
         @datasets = {}
         @repo = Rugged::Repository.new(path)
-        reset_data
       end
 
       def [](name)
@@ -32,17 +29,11 @@ module ROM
       end
 
       def dataset(name)
-        datasets[name] = Dataset.new(
-          connection, path: path, options: options, gateway: self
-        )
+        datasets[name] = Dataset.new(repo.references[branch].log)
       end
 
       def dataset?(name)
         datasets.key?(name)
-      end
-
-      def reset_data
-        @connection = repo.references[branch].log
       end
     end
   end

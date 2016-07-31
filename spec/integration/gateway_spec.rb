@@ -58,7 +58,7 @@ RSpec.describe 'Git gateway' do
 
     describe 'setup' do
       it 'raises when branch name is invalid' do
-        expect { ROM.container(:git, path, branch: 'not-here') }
+        expect { ROM.container(:git, path, branch: 'not-here') { |conf| conf.relation(:commits) } }
           .to raise_error(Rugged::ReferenceError, /not-here/)
       end
 

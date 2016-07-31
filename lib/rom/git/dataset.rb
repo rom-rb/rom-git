@@ -3,10 +3,6 @@ require 'rom/memory/dataset'
 module ROM
   module Git
     class Dataset < ROM::Memory::Dataset
-      option :path, reader: true
-      option :options, reader: true
-      option :gateway, reader: true
-
       def self.row_proc
         lambda do |row|
           {
@@ -19,14 +15,6 @@ module ROM
                         end)
           }
         end
-      end
-
-      def reload!
-        @data = gateway.reset_data
-      end
-
-      def count
-        @data.count
       end
     end
   end
