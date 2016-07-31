@@ -26,7 +26,7 @@ RSpec.describe 'Git gateway' do
       end
     end
 
-    describe 'rom#relation' do
+    shared_context 'a mapped relation tuple' do
       it 'returns restricted and mapped object' do
         commit = rom.relation(:commits)
           .as(:entity).by_sha1('101868c4ce62b7e96a1f7c3b64fa40285ee00d5e').one
@@ -35,6 +35,25 @@ RSpec.describe 'Git gateway' do
         expect(commit.message).to eql('commit (initial): Initial commit')
         expect(commit.committer).to eql('Franck Verrot')
       end
+    end
+
+    describe 'using a relation with a custom mapper' do
+      let(:commit) do
+        rom.relation(:commits)
+        .as(:entity).by_sha1('101868c4ce62b7e96a1f7c3b64fa40285ee00d5e').one
+      end
+
+      include_context 'a mapped relation tuple'
+    end
+
+    describe 'using a repository' do
+      let(:repo) do
+        Class.new(ROM::Repository[:commits]).new(rom)
+      end
+
+      let(:commits) { repo.commits.one }
+
+      include_context 'a mapped relation tuple'
     end
   end
 end

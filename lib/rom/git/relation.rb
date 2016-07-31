@@ -1,4 +1,6 @@
 require 'rom/relation'
+require 'rom/plugins/relation/key_inference'
+require 'rom/plugins/relation/view'
 
 module ROM
   module Git
@@ -6,6 +8,9 @@ module ROM
       adapter :git
 
       forward :join, :project, :restrict, :order
+
+      use :view
+      use :key_inference
 
       def count
         dataset.count
