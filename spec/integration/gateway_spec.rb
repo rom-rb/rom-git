@@ -61,6 +61,11 @@ RSpec.describe 'Git gateway' do
         expect { ROM.container(:git, path, branch: 'not-here') }
           .to raise_error(Rugged::ReferenceError, /not-here/)
       end
+
+      it 'configures with a custom branch' do
+        rom = ROM.container(:git, path, branch: 'refs/heads/feature') { |conf| conf.relation(:commits) }
+        expect(rom.relations[:commits].count).to be(0)
+      end
     end
   end
 end
