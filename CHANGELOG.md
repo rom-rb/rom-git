@@ -1,3 +1,7 @@
+# v2.1.0 2016-08-01
+
+Update to work with rom 2.0.0 and rom-repository
+
 # v2.0.0
 
 ## BREAKING CHANGE
