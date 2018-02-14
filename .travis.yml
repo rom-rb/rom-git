@@ -1,17 +1,18 @@
 language: ruby
 bundler_args: --without tools
+after_success:
+- '[ "$TRAVIS_RUBY_VERSION" = "2.5.0" ] && [ "$TRAVIS_BRANCH" = "master" ] && bundle exec codeclimate-test-reporter'
 script: "bundle exec rake spec"
 rvm:
-  - 2.0
-  - 2.1
-  - 2.2
+  - 2.3.4
+  - 2.4.1
+  - 2.5.0
   - rbx-2
-  - jruby-9.0.5.0
   - ruby-head
 matrix:
   allow_failures:
     - rvm: ruby-head
-    - rvm: jruby-9.0.5.0
+    - rvm: rbx-2
 notifications:
   webhooks:
     urls:
