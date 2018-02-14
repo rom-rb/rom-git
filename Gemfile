@@ -4,5 +4,6 @@ gemspec
 
 group :test do
   gem 'rom-repository'
-  gem 'codeclimate-test-reporter'
+  gem 'simplecov', require: false
+  gem 'codeclimate-test-reporter', require: false
 end
