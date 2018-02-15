@@ -2,6 +2,8 @@
 
 Update to work with rom 4.0.0. Thanks @alsemyonov !
 
+This release also drops support for JRuby, as rugged won't compile with it.
+
 # v2.1.0 2016-08-01
 
 Update to work with rom 2.0.0 and rom-repository
